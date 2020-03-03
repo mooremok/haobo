@@ -1,0 +1,11 @@
+{% for con in all_cons %}
+    {% for key, value in con.items %}
+    <h4>{{ key }}:</h4>
+        {% for con in value %}            
+        {{ con.name }}    
+        {% empty %}
+        产品未上架 
+        {% endfor %}
+        <hr/>
+    {% endfor %}
+{% endfor %}

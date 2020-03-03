@@ -1,0 +1,16 @@
+{% extends "admin/base_site.html" %}
+{% block content %}
+<div><h1><b>{{ company }}</b>调研详情表</h1><div>
+{% for datas in all_datas %}
+<div style="padding-bottom: 20px">
+<p>{{ forloop.counter }} 、
+    {% for question, answers in datas.items %}
+        {{ question }}
+</p>
+        {% for answer in answers %}
+        <li>{{ answer }}</li>
+        {% endfor %}
+    {% endfor %}
+</div>
+{% endfor %}
+{% endblock %}

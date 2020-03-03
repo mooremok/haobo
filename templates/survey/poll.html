@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block main %}
+<div class="page-hd">
+    <h1 class="page-hd-title">浩博设计板块调查问卷</h1>
+    <p class="page-hd-desc">让物流企业更具品牌力</p>
+</div>
+<div class="page-bd">
+    <form method="POST", action="">
+    {% csrf_token %}
+        <!--信息搜集部分-->
+        <div class="weui-cells__title weui-start">填写人姓名</div>
+        <div class="weui-form">
+            <div class="weui-form-li">
+                <input  type="text" class="weui-form-input" name="name">
+            </div>
+        </div>
+        <div class="weui-cells__title weui-start">公司全称</div>
+        <div class="weui-form">
+            <div class="weui-form-li">
+                <input  type="text" class="weui-form-input" name="company">
+            </div>
+        </div>
+        <!--遍历所有的问题与答案，这里会有很多层的判断，会很辛苦-->
+        {% for data in all_data_list %}                    
+        {% for key, value in data.items %}                 
+        <div class="weui-cells__title weui-start">{{ key.question }}<span class="f-green">[{{ key.get_status_choice_display }}]</span></div>
+            <!--判断是否有自定义回答，有与无皆在这个判断中处理-->
+            <!--有自定义回答-->
+            {% if key.status_source == 1 %}            
+            <div class="weui-form">
+                <div class="weui-form-li">
+                    <input  type="text" class="weui-form-input" name="status_source-{{ key.id }}">
+                </div>
+            </div>
+            <!--只有预设无自定义回答-->
+            {% elif key.status_source == 0 %}
+            <div class="weui-form">
+                <div class="weui-form-li iblock">
+                {% for v in value %}                    
+                <!--判断单选与多选，决定是checkbox还是radio-->
+                {% if key.status_choice == 1 %}                    
+                <input class="weui-form-checkbox" id="s{{ v.id }}" name="status_choice-{{ key.id }}" value="{{ v.id }}" type="radio">                    
+                <label for ="s{{ v.id }}">
+                    <i class="weui-icon-radio"></i>
+                    <div class="weui-form-text"><p>{{ v.cn_answer }}</p></div>
+                </label>
+                {% elif key.status_choice == 0 %}
+                <input class="weui-form-checkbox" id="s{{ v.id }}" name="status_choice-{{ key.id }}" value="{{ v.id }}" type="checkbox">                    
+                    <label for ="s{{ v.id }}">
+                        <i class="weui-icon-checkbox"></i>
+                        <div class="weui-form-text"><p>{{ v.cn_answer }}</p></div>
+                    </label>
+                {% endif %}                                                         
+                {% endfor %}
+                    
+                <!--显示所有预设答案后，判断是否包含“其他”，分别对单选与多选进行了判断-->
+                {% if key.status_extra == 1 and key.status_choice == 0 %}
+                <input class="weui-form-checkbox" id="me{{ key.id }}" name="status_extra-{{ key.id }}" value="{{ key.id }}" type="checkbox">
+                <label for ="me{{ key.id }}">
+                    <i class="weui-icon-checkbox"></i>
+                    <div class="weui-form-text"><p>其他</p></div>
+                </label>                    
+                <input type="input" name="status_extra-{{ key.id }}" style="border: 1px solid #cdcdcd;padding: 5px 2px;width:auto">
+                
+                
+                {% elif key.status_extra == 1 and key.status_choice == 1 %}
+                <input class="weui-form-checkbox" id="se{{ key.id }}" name="status_extra-{{ key.id }}" value="{{ key.id }}" type="radio">
+                <label for ="se{{ key.id }}">
+                    <i class="weui-icon-radio"></i>
+                    <div class="weui-form-text"><p>其他</p></div>
+                </label>                    
+                <input type="input" name="status_extra-{{ key.id }}" style="border: 1px solid #cdcdcd;padding: 5px 2px; width:auto" type="radio">
+                
+                {% endif %}                 
+            {% endif %}
+            <!--问题与答案遍历完毕-->           
+        </div>                   
+        {% endfor %}
+        {% endfor %}
+        <div class="weui-btn-area">
+            <input class="weui-btn weui-btn_primary"   type="submit" value="提交">        
+        </div>
+</form>
+    <div  class="weui-btn-area" style="margin-bottom: 30px">
+        <a class="weui-btn weui-btn weui-btn_plain-primary" href="{% url 'home' %}">返回首页</a>
+    </div>
+{% endblock %}

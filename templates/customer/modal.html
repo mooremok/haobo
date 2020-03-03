@@ -1,0 +1,143 @@
+{% extends "admin/base_site.html" %}
+{% block content %}
+<div><h1><b>{{ company }}</b>挑选详情表</h1><div>
+<div style="width:50%">
+    <div><h1>咨询类产品</h1><div>
+    <div>
+        {% for data in consultations %}
+            {% for key, value in data.items %}      
+                <table style="width:200%">
+                    <div style="color:#447e9b; font-weight:600; padding-top:10px; padding-bottom:5px">{{ key.name }}</div>
+                    <thead>
+                        <tr>
+                            <th style="width:10%"> 
+                                <div>序号</div>                                
+                            </th>
+                            <th> 
+                                <div>名称</div>                                
+                            </th>
+                            <th style="width:10%"> 
+                                <div>价格</div>                                
+                            </th> 
+                            <th style="width:30%">  
+                                <div>说明</div>                                
+                            </th>                                                        
+                        </tr>
+                    </thead>
+                    {% for con in value %}
+                    <tbody>                    
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ con }}</td>
+                            <td>{{ con.price }}</td>
+                            <td>{{ con.desc }}</td>                                                    
+                        </tr>                
+                    </tbody>
+                    {% endfor %}
+                </table>
+            {% endfor %}
+        {% endfor %}            
+    </div>
+
+    <div style="padding-top:30px"><h1>设计类产品</h1><div>
+    <div>
+        {% for data in designs %}
+            {% for key, value in data.items %}      
+                <table style="width:200%">
+                    <div style="color:#447e9b; font-weight:600; padding-top:10px; padding-bottom:5px">{{ key.name }}</div>
+                    <thead>
+                        <tr>
+                            <th style="width:10%"> 
+                                <div>序号</div>                                
+                            </th>
+                            <th> 
+                                <div>名称</div>                                
+                            </th>
+                            <th style="width:10%"> 
+                                <div>价格</div>                                
+                            </th> 
+                            <th style="width:30%">  
+                                <div>说明</div>                                
+                            </th>                                                        
+                        </tr>
+                    </thead>
+                    {% for con in value %}
+                    <tbody>                    
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ con }}</td>
+                            <td>{{ con.price }}</td>
+                            <td>{{ con.desc }}</td>                                                    
+                        </tr>                
+                    </tbody>
+                    {% endfor %}
+                </table>
+            {% endfor %}
+        {% endfor %}            
+    </div>
+
+    <div style="padding-top:30px"><h1>营销类产品</h1><div>
+    <div>
+        {% for data in markets %}                  
+                <table style="width:200%">                    
+                    <thead>
+                        <tr>
+                            <th style="width:10%"> 
+                                <div>序号</div>                                
+                            </th>
+                            <th> 
+                                <div>名称</div>                                
+                            </th>
+                            <th style="width:10%"> 
+                                <div>价格</div>                                
+                            </th> 
+                            <th style="width:30%">  
+                                <div>说明</div>                                
+                            </th>                                                        
+                        </tr>
+                    </thead>                    
+                    <tbody>                    
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ data }}</td>
+                            <td>{{ data.price }}</td>
+                            <td>{{ data.desc }}</td>                                                    
+                        </tr>                
+                    </tbody>                    
+                </table>            
+        {% endfor %}            
+    </div>
+
+    <div style="padding-top:30px"><h1>落地类产品</h1><div>
+    <div>
+        {% for data in imps %}                  
+                <table style="width:200%">                    
+                    <thead>
+                        <tr>
+                            <th style="width:10%"> 
+                                <div>序号</div>                                
+                            </th>
+                            <th> 
+                                <div>名称</div>                                
+                            </th>
+                            <th style="width:10%"> 
+                                <div>价格</div>                                
+                            </th> 
+                            <th style="width:30%">  
+                                <div>说明</div>                                
+                            </th>                                                        
+                        </tr>
+                    </thead>                    
+                    <tbody>                    
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ data }}</td>
+                            <td>{{ data.price }}</td>
+                            <td>{{ data.desc }}</td>                                                    
+                        </tr>                
+                    </tbody>                    
+                </table>            
+        {% endfor %}            
+    </div>       
+</div>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block header %}
+    <style>
+        body {
+            background-image: url(static/image/img_for_css/bg.png); 
+        }
+        .header {
+            text-align: center;
+            padding-top: 10px;
+        }
+        .logo {
+            width: 40%;            
+        }
+        .div_logo {
+            text-align: center;
+            padding-top: 100px;
+        }
+        h4 {
+            color: #b4012b;
+        }
+        .btn {
+            padding-top: 100px;
+        }
+    </style>
+{% endblock %} 
+{% block main %}
+<div class="container page-hd">
+    <div class="div_logo"><img class="logo" src="static/image/img_for_css/logo.png"></div>
+    <div class="header"><h4>浩博网上服务中心</h4></div>
+    <div class="btn">
+        <a class="weui-btn weui-btn_primary" href="{% url 'order' %}">选择产品服务</a>
+        <a class="weui-btn weui-btn_primary" href="{% url 'poll' %}">设计调研表</a>        
+    </div>
+</div>
+
+<div class="weui-footer weui-footer_fixed-bottom">
+    <p class="weui-footer__links">
+        <a href="" class="weui-footer__link">广州市浩博广告有限公司</a>
+    </p>
+    <p class="weui-footer__text">让物流企业更具品牌力</p>
+    <p class="weui-footer__text">Copyright &copy; HAOBO</p>
+</div>
+{% endblock %}
